@@ -3,6 +3,8 @@ import Image from "next/image";
 import React, { useState } from "react";
 import logo from '../../../public/img/logo.png';
 import Link from "next/link";
+import { SignedOut, SignInButton, UserButton, SignedIn } from "@clerk/nextjs";
+import { DotIcon, LayoutDashboard, LayoutDashboardIcon, PersonStandingIcon } from "lucide-react";
 
 export default function Header() {
   const [isToggleOpen, setIsToggleOpen] = useState(false)
@@ -32,11 +34,10 @@ export default function Header() {
             {/*      <!-- Mobile trigger --> */}
             <button
               className={`relative order-10 block h-10 w-10 self-center lg:hidden
-              ${
-                isToggleOpen
+              ${isToggleOpen
                   ? "visible opacity-100 [&_span:nth-child(1)]:w-6 [&_span:nth-child(1)]:translate-y-0 [&_span:nth-child(1)]:rotate-45 [&_span:nth-child(2)]:-rotate-45 [&_span:nth-child(3)]:w-0 "
                   : ""
-              }
+                }
             `}
               onClick={() => setIsToggleOpen(!isToggleOpen)}
               aria-expanded={isToggleOpen ? "true" : "false"}
@@ -61,11 +62,10 @@ export default function Header() {
             <ul
               role="menubar"
               aria-label="Select page"
-              className={`absolute left-0 top-0 z-[-1] h-[28.5rem] w-full justify-center overflow-hidden  overflow-y-auto overscroll-contain bg-white/90 px-8 pb-12 pt-24 font-medium transition-[opacity,visibility] duration-300 lg:visible lg:relative lg:top-0  lg:z-0 lg:flex lg:h-full lg:w-auto lg:items-stretch lg:overflow-visible lg:bg-white/0 lg:px-0 lg:py-0  lg:pt-0 lg:opacity-100 ${
-                isToggleOpen
-                  ? "visible opacity-100 backdrop-blur-sm"
-                  : "invisible opacity-0"
-              }`}
+              className={`absolute left-0 top-0 z-[-1] h-[28.5rem] w-full justify-center overflow-hidden  overflow-y-auto overscroll-contain bg-white/90 px-8 pb-12 pt-24 font-medium transition-[opacity,visibility] duration-300 lg:visible lg:relative lg:top-0  lg:z-0 lg:flex lg:h-full lg:w-auto lg:items-stretch lg:overflow-visible lg:bg-white/0 lg:px-0 lg:py-0  lg:pt-0 lg:opacity-100 ${isToggleOpen
+                ? "visible opacity-100 backdrop-blur-sm"
+                : "invisible opacity-0"
+                }`}
             >
               <li role="none" className="flex items-stretch">
                 <Link
@@ -101,22 +101,29 @@ export default function Header() {
             </ul>
             <div className="ml-auto flex items-center px-6 lg:ml-0 lg:p-0">
               {/*        <!-- Avatar --> */}
-              <a
-                href="#"
-                className="relative inline-flex h-10 w-10 items-center justify-center rounded-full text-white"
-              >
-                <img
-                  src="https://i.pravatar.cc/40?img=35"
-                  alt="user name"
-                  title="user name"
-                  width="40"
-                  height="40"
-                  className="max-w-full rounded-full"
-                />
-                <span className="absolute bottom-0 right-0 inline-flex items-center justify-center gap-1 rounded-full border-2 border-white bg-pink-500 p-1 text-sm text-white">
-                  <span className="sr-only"> 7 new emails </span>
-                </span>
-              </a>
+              <SignedOut>
+                <SignInButton className='font-semibold text-xl bg-[var(--blood-color)] text-slate-50 shadow hover:shadow-3 rounded px-5 py-2' />
+              </SignedOut>
+              <SignedIn>
+                {/* <UserButton>
+                    <UserButton.MenuItems>
+                      <UserButton.Action
+                        label="Open chat"
+                        labelIcon={<DotIcon />}
+                        onClick={() => alert('init chat')}
+                      />
+                    </UserButton.MenuItems>
+                </UserButton> */}
+                <UserButton>
+                  <UserButton.MenuItems>
+                    <UserButton.Link
+                      label="Dashboard"
+                      labelIcon={<LayoutDashboardIcon />}
+                      href="/dashboard"
+                    />
+                  </UserButton.MenuItems>
+                </UserButton>
+              </SignedIn>
               {/*        <!-- End Avatar --> */}
             </div>
           </nav>

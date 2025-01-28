@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/ui/Header";
+import Footer from "@/components/ui/Footer";
+import { ClerkProvider } from "@clerk/nextjs";
 
 
 export const metadata: Metadata = {
@@ -14,15 +16,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`antialiased rounded w-screen h-screen mx-auto`}
-      >
-        <div className="h-full flex flex-col justify-start items-center ">
-          <Header />
-          {children}
-        </div>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body
+          className={`antialiased rounded w-screen h-screen mx-auto`}
+        >
+          <div className="h-screen flex flex-col justify-between items-center ">
+            <Header />
+            {children}
+            <Footer />
+          </div>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
