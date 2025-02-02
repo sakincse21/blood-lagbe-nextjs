@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import bannerImg from '../../public/img/Blood-donation-amico.svg';
-import { Button } from '@/components/ui/Button';
 import Link from 'next/link';
 
 export default function Home() {
@@ -18,10 +17,14 @@ export default function Home() {
         </span>
         <span className='flex flex-row items-center justify-center gap-2 my-5'>
           <Link href="/findblood">
-            <Button variant={"blood"} size={"lg"} >Find Blood</Button>
+            <button className="inline-flex items-center justify-center h-12 gap-2 px-6 text-lg font-medium tracking-wide text-white transition duration-300 rounded whitespace-nowrap bg-slate-500 hover:bg-[var(--blood-color)] focus:bg-[var(--blood-color)] focus-visible:outline-none disabled:cursor-not-allowed disabled:border-gray-300 disabled:bg-gray-300 disabled:shadow-none">
+              <span>Find Blood</span>
+            </button>
           </Link>
-          <Link href="/beadonor">
-            <Button variant={"bloodrev"} size={"lg"} >Donate Blood</Button> 
+          <Link href="/sign-up/">
+            <button className="inline-flex items-center justify-center h-12 gap-2 px-6 text-lg font-medium tracking-wide text-white transition duration-300 rounded whitespace-nowrap bg-slate-500 hover:bg-[var(--blood-color)] focus:bg-[var(--blood-color)] focus-visible:outline-none disabled:cursor-not-allowed disabled:border-gray-300 disabled:bg-gray-300 disabled:shadow-none">
+              <span>Be a Donor</span>
+            </button>
           </Link>
         </span>
       </div>

@@ -1,13 +1,14 @@
 'use client';
 import Image from "next/image";
-import React, { useState } from "react";
 import logo from '../../../public/img/logo.png';
 import Link from "next/link";
 import { SignedOut, SignInButton, UserButton, SignedIn } from "@clerk/nextjs";
-import { DotIcon, LayoutDashboard, LayoutDashboardIcon, PersonStandingIcon } from "lucide-react";
+import { useState } from "react";
+import { LayoutDashboardIcon } from "lucide-react";
 
 export default function Header() {
-  const [isToggleOpen, setIsToggleOpen] = useState(false)
+
+  const [isToggleOpen, setIsToggleOpen] = useState(false);
 
   return (
     <>
@@ -77,7 +78,7 @@ export default function Header() {
                   <span className="font-semibold text-xl">Find Blood</span>
                 </Link>
               </li>
-              <li role="none" className="flex items-stretch">
+              {/* <li role="none" className="flex items-stretch">
                 <Link
                   role="menuitem"
                   aria-current="page"
@@ -87,7 +88,7 @@ export default function Header() {
                 >
                   <span className="font-semibold text-xl">Be a Donor</span>
                 </Link>
-              </li>
+              </li> */}
               <li role="none" className="flex items-stretch">
                 <Link
                   role="menuitem"
@@ -98,34 +99,27 @@ export default function Header() {
                   <span className="font-semibold text-xl">Contact Us</span>
                 </Link>
               </li>
+              <li role="none" className="flex items-stretch">
+                <div className="ml-auto flex items-center px-6 lg:ml-0 lg:p-0">
+                  {/*        <!-- Avatar --> */}
+                  <SignedOut>
+                    <SignInButton className='font-semibold text-xl bg-[var(--blood-color)] text-slate-50 shadow hover:shadow-3 rounded px-5 py-2'>Be a Donor</SignInButton>
+                  </SignedOut>
+                  <SignedIn>
+                    <UserButton>
+                      <UserButton.MenuItems>
+                        <UserButton.Link
+                          label="Dashboard"
+                          labelIcon={<LayoutDashboardIcon />}
+                          href="/dashboard"
+                        />
+                      </UserButton.MenuItems>
+                    </UserButton>
+                  </SignedIn>
+                  {/*        <!-- End Avatar --> */}
+                </div>
+              </li>
             </ul>
-            <div className="ml-auto flex items-center px-6 lg:ml-0 lg:p-0">
-              {/*        <!-- Avatar --> */}
-              <SignedOut>
-                <SignInButton className='font-semibold text-xl bg-[var(--blood-color)] text-slate-50 shadow hover:shadow-3 rounded px-5 py-2' />
-              </SignedOut>
-              <SignedIn>
-                {/* <UserButton>
-                    <UserButton.MenuItems>
-                      <UserButton.Action
-                        label="Open chat"
-                        labelIcon={<DotIcon />}
-                        onClick={() => alert('init chat')}
-                      />
-                    </UserButton.MenuItems>
-                </UserButton> */}
-                <UserButton>
-                  <UserButton.MenuItems>
-                    <UserButton.Link
-                      label="Dashboard"
-                      labelIcon={<LayoutDashboardIcon />}
-                      href="/dashboard"
-                    />
-                  </UserButton.MenuItems>
-                </UserButton>
-              </SignedIn>
-              {/*        <!-- End Avatar --> */}
-            </div>
           </nav>
         </div>
       </header>
