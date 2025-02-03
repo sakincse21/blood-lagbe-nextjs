@@ -1,4 +1,4 @@
-
+//checks if new donor or existing donor
 import { connect } from "@/dbConfig/dbConfig";
 import donor from "@/models/userModel";
 import { NextRequest, NextResponse } from 'next/server';
@@ -15,11 +15,9 @@ export async function GET(request: NextRequest) {
         
         const existingDonor = await donor.findOne({  userId });
 
-        console.log('first');
         
-        console.log(existingDonor);
+        // console.log(existingDonor);
         
-        console.log('second');
 
         if(!existingDonor){
             return NextResponse.json({ success: false, error: 'Profile not found' })
@@ -34,4 +32,5 @@ export async function GET(request: NextRequest) {
     } catch (error) {
         return NextResponse.json({ success: false, error: error })
     }
+    //success variable sent to for better implementation
 }

@@ -12,7 +12,7 @@ export default clerkMiddleware(async (auth, request) => {
   
   const currentUrl = new URL(request.url);
   if(userId && isPublicRoute(request)){
-    return NextResponse.redirect(new URL('/dashboard', request.url))
+    return NextResponse.redirect(new URL('/dashboard2', request.url))
   }
   // if (!isPublicRoute(request)) {
   //   await auth.protect()
@@ -21,6 +21,9 @@ export default clerkMiddleware(async (auth, request) => {
     return NextResponse.redirect(new URL('/sign-in', request.url))
   }
   if(currentUrl.pathname === '/api/donors' && !userId){
+    return NextResponse.redirect(new URL('/sign-in', request.url))
+  }
+  if(currentUrl.pathname === '/api/checkdonor' && !userId){
     return NextResponse.redirect(new URL('/sign-in', request.url))
   }
   return NextResponse.next();

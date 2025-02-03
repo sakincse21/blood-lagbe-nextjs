@@ -1,3 +1,4 @@
+//route to find available donors based on location and blood group
 
 import { connect } from "@/dbConfig/dbConfig";
 import donor from "@/models/userModel";
