@@ -57,13 +57,13 @@ const FindBlood = () => {
 
     return (
         <div className="min-h-full w-full flex flex-col content-center items-center my-5">
-            <div className="h-full w-full px-6 mx-auto flex flex-wrap flex-col-reverse justify-around lg:flex-row  pt-6 my-8">
+            <div className="h-full w-full px-6 mx-auto flex flex-col-reverse flex-wrap justify-around lg:flex-row  pt-6 my-8 animate-in fade-in  ">
                 <div className='flex flex-col justify-center items-center gap-2 py-5'>
 
-                    <div className="font-bold text-2xl  my-3">Lets search for a donor</div>
+                    <div className="font-bold text-2xl  my-3">Search for donors</div>
                     {/* dropdown menu for district selection */}
 
-                    <div className="relative my-3 md:w-60  transition-all duration-300 ease-in-out">
+                    <div className="relative my-3 md:w-60  animate-in fade-in  ">
                         <select
                             id="districtmenu"
                             name="districtmenu"
@@ -90,7 +90,7 @@ const FindBlood = () => {
 
                     {
                         selectedDistrict &&
-                        <div className="relative my-3 md:w-60  transition-all duration-300 ease-in-out">
+                        <div className="relative my-3 md:w-60  animate-in fade-in  ">
                             <select
                                 id="upazillamenu"
                                 name="upazillamenu"
@@ -112,7 +112,7 @@ const FindBlood = () => {
 
                     {
                         selectedUpazilla &&
-                        <div className="relative my-3 md:w-60 transition-all duration-300 ease-in-out">
+                        <div className="relative my-3 md:w-60 animate-in fade-in  ">
                             <select
                                 id="bloodgroupmenu"
                                 name="bloodgroupmenu"
@@ -134,12 +134,12 @@ const FindBlood = () => {
 
                     {
                         selectedUpazilla && selectedDistrict && selectedBloodGroup &&
-                        <button onClick={searchNow} className="btn btn-md md:btn-md lg:btn-lg bg-[var(--blood-color)] text-white hover:bg-[var(--blood-color-hover)]" >
+                        <button onClick={searchNow} className="btn btn-md md:btn-md lg:btn-lg bg-[var(--blood-color)] text-white hover:bg-[var(--blood-color-hover)] animate-in fade-in  " >
                             <span>Search Now</span>
                         </button>
                     }
                 </div>
-                <div className='flex flex-col justify-center items-center '>
+                <div className='flex flex-col justify-center items-center animate-in fade-in  '>
                     <div className='my-auto'>
 
                     <Image src={bannerImg} alt="banner" />
@@ -148,7 +148,7 @@ const FindBlood = () => {
             </div>
             {/* search result and the donors list viewed in donorcards */}
             
-            <div className="flex flex-row flex-wrap gap-4 justify-center items-center my-5 pb-5 h-full w-full">
+            <div className="flex flex-row flex-wrap gap-4 justify-center items-center my-5 pb-5 h-full w-full animate-in fade-in  ">
                 { (loader) && <Loader loader={loader} /> }
                 { (!loader) &&
                     donors?.map((donor, index) =>

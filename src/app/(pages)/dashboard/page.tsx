@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 import allarea from '../../../../public/areas/allarea';
 import isValidBangladeshiNumber from '@/functions/mobileCheck';
 import donorCalendarCheck from '@/functions/donorCalendarCheck';
+import donationTimeCounter from '@/functions/donationTimeCounter';
+import DashboardCounter from '@/components/ui/DashboardCounter';
 
 export default function Dashboard() {
     // states to hold and manage donor data
@@ -65,11 +67,7 @@ export default function Dashboard() {
                         setPrevFormData(formattedDonor);
 
                         //calculate counter for next donation date
-                        const now = new Date();
-                        const target = new Date(donor?.lastDonationDate);
-                        const difference = now.getTime() - target.getTime();
-                        const days = Math.floor(Math.abs(difference) / (3600 * 24 * 1000));
-                        setCounter((90 - days) < 0 ? 0 : (90 - days));
+                        setCounter(donationTimeCounter(formattedDonor?.lastDonationDate));
                     }
                 }
             } catch (error) {
@@ -113,6 +111,7 @@ export default function Dashboard() {
             console.error(error);
             alert("An error occurred.");
         }
+        setCounter(donationTimeCounter(formData?.lastDonationDate));
         setLoader(false);
     };
 
@@ -121,15 +120,15 @@ export default function Dashboard() {
 
     return (
         <>
-            {loader && <div className="min-h-full min-w-screen flex flex-col items-center justify-center rounded lg:rounded-lg">
+            {loader && <div className="min-h-full h-full w-full flex flex-col items-center justify-center rounded lg:rounded-lg animate-in fade-in">
                 <Loader loader={loader} />
             </div>
             }
             {!loader && (
-                <div className="min-h-screen h-auto bg-base-200 rounded lg:rounded-lg p-4">
+                <div className="min-h-full h-full w-full bg-base-200 rounded lg:rounded-lg p-4 flex flex-col items-center justify-center">
                     {/* Success profile update */}
                     {!accepted && (
-                        <div role="alert" className="alert alert-success flex flex-row items-center justify-between my-5">
+                        <div role="alert" className="alert alert-success flex flex-row items-center justify-between my-5 animate-in fade-in">
                             <span>Profile updated successfully!</span>
                             <button className="btn btn-ghost" onClick={() => setAccepted(true)}>
                                 <svg
@@ -149,7 +148,7 @@ export default function Dashboard() {
 
                     {/* Error in upading profile */}
                     {!rejected && (
-                        <div role="alert" className="alert alert-error flex flex-row items-center justify-between my-5">
+                        <div role="alert" className="alert alert-error flex flex-row items-center justify-between my-5 animate-in fade-in">
                             <span>Something went wrong!</span>
                             <button className="btn btn-ghost" onClick={() => setRejected(true)}>
                                 <svg
@@ -168,20 +167,12 @@ export default function Dashboard() {
                     )}
 
                     {/* Dashboard content starts */}
-                    <main className="container mx-auto p-4 md:p-8">
+                    <main className="container mx-auto p-4 animate-in fade-in md:p-8 ">
                         <div className="max-w-3xl mx-auto">
                             <h1 className="text-3xl font-bold mb-8">Donor Dashboard</h1>
 
                             {/* Next Donation Counter */}
-                            <div className='card p-6 flex flex-col items-center gap-5 text-center auto-cols-max'>
-                                <div className="flex flex-col p-2 bg-neutral rounded-box text-neutral-content">
-                                    <span className="countdown text-5xl p-3">{counter}</span>
-                                    days
-                                </div>
-                                <div className="text-content">
-                                    <span className="countdown text-2xl">until next donation</span>
-                                </div>
-                            </div>
+                            <DashboardCounter counter={counter} date={formData?.lastDonationDate} />
 
                             {/* Profile Form */}
                             <form onSubmit={handleSubmit} className="card bg-base-100 shadow-sm">

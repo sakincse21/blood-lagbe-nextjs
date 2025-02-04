@@ -7,7 +7,7 @@ import '../../app/globals.css';
 const DonorCard = (props: { details: [string, string, string, string, string, string] }) => {
     const [name, upazilla, district, bloodGroup, mobile, date] = props.details;
     return (
-        <div className="flex flex-col flex-wrap rounded-2xl w-80 bg-[#ffffff] shadow-xl bg-base-100 border-slate-200 border-2 hover:shadow-2xl">
+        <div className="flex flex-col flex-wrap rounded-2xl w-80 bg-[#ffffff] shadow-xl bg-base-100 border-slate-200 border-2 hover:shadow-2xl animate-in fade-in">
             <div className="flex flex-col p-4 gap-1">
                 <div className="text-lg font-bold ">{name}</div>
                 <div className="divider"></div>

@@ -5,7 +5,7 @@ import { Code2Icon, CodeIcon, FacebookIcon, GithubIcon, InstagramIcon, LinkedinI
 
 const ContactUs = () => {
   return (
-    <div className="mockup-phone h-full">
+    <div className="mockup-phone h-full animate-in fade-in   ">
       <div className="camera"></div>
       <div className="display">
         <div className="artboard artboard-demo phone-1">
