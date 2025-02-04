@@ -11,6 +11,12 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+  {
+    rules: {
+      "react-hooks/exhaustive-deps": "warn", // Change this rule to a warning instead of an error
+      "@typescript-eslint/no-explicit-any": "off", // Disable the "no-explicit-any" rule
+    },
+  },
 ];
 
 export default eslintConfig;

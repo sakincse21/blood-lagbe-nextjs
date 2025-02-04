@@ -29,6 +29,8 @@ export async function POST(request: NextRequest) {
                 }
             );
 
+            console.log(updatedDonor);
+            
             // Return updated donor data after successful update
             const updatedDonorData = await donor.findOne({ userId });
             return NextResponse.json({success: true, updatedDonorData})

@@ -10,16 +10,26 @@ import DonorCard from "@/components/ui/DonorCard";
 import Loader from "@/components/ui/Loader";
 import donationTimeCalculator from "@/functions/donationTimeCalculator";
 
+interface Donor {
+    _id?: string;
+    name: string;
+    upazilla: string;
+    district: string;
+    bloodGroup: string;
+    mobile: string;
+    lastDonationDate: string;
+}
+
 const FindBlood = () => {
     // const fakedonor = [{ "_id": "67591a91749fe6c514b40977", "name": "Saleheen", "age": "21", "area": "South Jhiltuly", "mobile": "+8801833410082", "bloodGroup": "O+", "email": "saleheen.sakin@gmail.com", "date": ["2024-09-18", "2003-07-10"], "isDonor": true }];
     const bloodGroups = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];
 
     const areas=allarea.districts;
-    const [upazilas, setUpazilas] = useState([]);
+    const [upazilas, setUpazilas] = useState<string[]>([]);
     const [selectedDistrict, setSelectedDistrict] = useState("");
     const [selectedUpazilla, setSelectedUpazilla] = useState("");
     const [selectedBloodGroup, setSelectedBloodGroup] = useState("");
-    const [donors, setDonors] = useState([]);
+    const [donors, setDonors] = useState<Donor[]>([]);
     const [loader, setLoader] = useState(false);
     
     const searchNow = async () => {

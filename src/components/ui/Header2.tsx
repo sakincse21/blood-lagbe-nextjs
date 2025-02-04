@@ -1,5 +1,5 @@
 'use client'
-import { ContactIcon, LayoutDashboardIcon, SearchIcon } from 'lucide-react'
+import { ContactIcon, LayoutDashboardIcon, SearchIcon, UserCircle2Icon } from 'lucide-react'
 import logo from '../../../public/img/logo.png'
 import React from 'react'
 import Image from 'next/image'
@@ -34,7 +34,7 @@ const Header2 = () => {
                         <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
                             <li className='mx-auto block md:hidden py-3'>
                                 <SignedOut>
-                                    <SignInButton className='font-semibold text-lg bg-[var(--blood-color)] text-slate-50 shadow hover:shadow-2 rounded px-5 py-2'>Be a Donor</SignInButton>
+                                    <SignInButton><span><UserCircle2Icon /></span></SignInButton>
                                 </SignedOut>
                                 <SignedIn>
                                     <UserButton>
@@ -78,7 +78,7 @@ const Header2 = () => {
             <div className='hidden md:block '>
                 {/*        <!-- Avatar --> */}
                 <SignedOut>
-                <SignInButton className='font-semibold text-lg bg-[var(--blood-color)] text-slate-50 shadow hover:shadow-2 rounded px-5 py-2'>Be a Donor</SignInButton>
+                <SignInButton><span><UserCircle2Icon /></span></SignInButton>
                 </SignedOut>
                 <SignedIn>
                     <UserButton>

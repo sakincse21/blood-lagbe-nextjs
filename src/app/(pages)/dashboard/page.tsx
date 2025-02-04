@@ -13,7 +13,7 @@ export default function Dashboard() {
     const [loader, setLoader] = useState(true);
     const [accepted, setAccepted] = useState(true);
     const areas = allarea.districts;
-    const [upazilas, setUpazilas] = useState([]);
+    const [upazilas, setUpazilas] = useState<string[]>([]);
     const [rejected, setRejected] = useState(true);
     const [counter, setCounter] = useState(0);
     const [userId, setUserId] = useState("");
@@ -33,7 +33,7 @@ export default function Dashboard() {
         if (user?.id && userId !== user?.id) {
             setUserId(user.id);
         }
-    }, [user?.id]);
+    }, [user?.id, userId]);
 
     useEffect(() => {
         setLoader(true);
@@ -67,7 +67,7 @@ export default function Dashboard() {
                         //calculate counter for next donation date
                         const now = new Date();
                         const target = new Date(donor?.lastDonationDate);
-                        const difference = now-target;
+                        const difference = now.getTime() - target.getTime();
                         const days = Math.floor(Math.abs(difference) / (3600 * 24 * 1000));
                         setCounter((90 - days) < 0 ? 0 : (90 - days));
                     }
@@ -79,7 +79,7 @@ export default function Dashboard() {
         };
 
         if (userId) fetchProfile();
-    }, [userId]);
+    }, [userId, areas]);
 
     //handles changes for input fields
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -195,7 +195,7 @@ export default function Dashboard() {
 
                                         <div className="form-control">
                                             <label className="label">Mobile Number</label>
-                                            <input type="tel" className="input input-bordered" name="mobile" value={formData.mobile} onChange={handleChange} placeholder='+8801XXXXXXXXX'/>
+                                            <input type="tel" className="input input-bordered" name="mobile" value={formData.mobile} onChange={handleChange} placeholder='+8801XXXXXXXXX' />
                                             {
                                                 //checkes if valid bangladeshi number
                                                 !isValidBangladeshiNumber(formData.mobile) &&
@@ -224,7 +224,7 @@ export default function Dashboard() {
                                                     ))
                                                 }
                                             </select>
-                                            </div>
+                                        </div>
 
                                         <div className="form-control">
                                             <label className="label">Upazilla</label>
@@ -242,7 +242,7 @@ export default function Dashboard() {
                                                     ))
                                                 }
                                             </select>
-                                            </div>
+                                        </div>
 
                                         <div className="form-control">
                                             <label className="label">Blood Group</label>
